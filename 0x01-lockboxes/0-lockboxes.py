@@ -13,18 +13,18 @@ def canUnlockAll(boxes):
     -------
         True if all boxes can be unlocked otherwise False
     '''
-    if not isinstance(boxes, list):
-        return False
-    if len(boxes) == 0:
-        return False
-    unlocked = set()
+    from collections import deque
 
-    def dfs(v):
-        '''deep first search on all boxes to see if we can visit all of them'''
-        unlocked.add(v)
-        for key in boxes[v]:
+    if not isinstance(boxes, list) or len(boxes) == 0:
+        return False
+
+    unlocked = set([0])
+    queue = deque([0])
+
+    while queue:
+        current_box = queue.popleft()
+        for key in boxes[current_box]:
             if key not in unlocked and key < len(boxes):
-                dfs(key)
-
-    dfs(0)
+                unlocked.add(key)
+                queue.append(key)
     return len(unlocked) == len(boxes)

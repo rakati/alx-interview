@@ -13,6 +13,8 @@ def canUnlockAll(boxes):
     -------
         True if all boxes can be unlocked otherwise False
     '''
+    if not isinstance(boxes, list):
+        return False
     unlocked = set()
 
     def dfs(v):

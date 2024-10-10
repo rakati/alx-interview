@@ -18,9 +18,9 @@ def canUnlockAll(boxes):
     def dfs(v):
         '''deep first search on all boxes to see if we can visit all of them'''
         unlocked.add(v)
-        for box in boxes[v]:
-            if box not in unlocked:
-                dfs(box)
+        for key in boxes[v]:
+            if key not in unlocked and key < len(boxes):
+                dfs(key)
 
     dfs(0)
     return len(unlocked) == len(boxes)

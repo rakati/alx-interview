@@ -15,6 +15,8 @@ def canUnlockAll(boxes):
     '''
     if not isinstance(boxes, list):
         return False
+    if len(boxes) == 0:
+        return False
     unlocked = set()
 
     def dfs(v):

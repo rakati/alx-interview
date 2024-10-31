@@ -15,10 +15,14 @@ def validUTF8(data):
     # counting number of continuation bytes to be fulfilled
     n = 0
     for code in data:
-        if n == 0:
+        if n > 0:
+            if code >> 6 != 0b10:
+                return False
+            n -= 1
+        else:
             # not expecting continuation bytes
             if code >> 7 == 0:
-                continue
+                n = 0
             elif code >> 5 == 0b110:
                 # should expect one continuation byte
                 n = 1
@@ -31,8 +35,4 @@ def validUTF8(data):
             else:
                 # format unknown
                 return False
-        else:
-            if code >> 6 != 0b10:
-                return False
-            n -= 1
     return n == 0

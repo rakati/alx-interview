@@ -28,7 +28,7 @@ def validUTF8(data):
             else:
                 return False
         elif n > 0:
-            if n >> 6 != 0b10:
+            if code >> 6 != 0b10:
                 return False
             n -= 1
-    return True if n == 0 else False
+    return n == 0

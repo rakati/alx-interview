@@ -20,14 +20,18 @@ def validUTF8(data):
             if code >> 7 == 0:
                 continue
             elif code >> 5 == 0b110:
+                # should expect one continuation byte
                 n = 1
             elif code >> 4 == 0b1110:
+                # should expect two continuation bytes
                 n = 2
             elif code >> 3 == 0b11110:
+                # should expect three continuation bytes
                 n = 3
             else:
+                # format unknown
                 return False
-        elif n > 0:
+        else:
             if code >> 6 != 0b10:
                 return False
             n -= 1

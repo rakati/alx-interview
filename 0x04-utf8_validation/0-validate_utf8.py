@@ -15,6 +15,8 @@ def validUTF8(data):
     # counting number of continuation bytes to be fulfilled
     n = 0
     for code in data:
+        # check only least 8 significant bits
+        code = code & 0xFF
         if n > 0:
             if code >> 6 != 0b10:
                 return False

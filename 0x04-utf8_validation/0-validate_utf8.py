@@ -32,4 +32,4 @@ def validUTF8(data):
                 n -= 1
             else:
                 return False
-    return True
+    return True if n == 0 else False

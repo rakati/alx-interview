@@ -45,8 +45,7 @@ if __name__ == "__main__":
         try:
             line = input()
         except EOFError:
-            if c > 0:
-                print_log_info(0, 0)
+            print_log_info(0, 0)
             break
         # checking line format
         # "{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n

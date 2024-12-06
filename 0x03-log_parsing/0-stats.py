@@ -28,7 +28,7 @@ if __name__ == "__main__":
     # date = r'\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}.\d{1,6}'
     log_pattern = r'[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3} - '\
                   r'\[\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}.\d{1,6}\]'\
-                  r' "GET \/projects\/260 HTTP\/1.1" \d{3} \d{1,4}\n'
+                  r' "GET \/projects\/260 HTTP\/1.1" \d{3} \d{1,4}'
     st = {
             '200': 0, '301': 0, '400': 0, '401': 0, '403': 0, '404': 0,
             '405': 0, '500': 0
@@ -36,7 +36,11 @@ if __name__ == "__main__":
     all_status = ['200', '301', '400', '401', '403', '404', '405', '500']
     d = st.copy()
     fs = 0
-    for line in fileinput.input():
+    while True:
+        try:
+            line = input()
+        except EOFError:
+            break
         # checking line format
         # "{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n
         # increment counter only for valid lines

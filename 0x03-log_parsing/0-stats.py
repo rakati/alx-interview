@@ -44,8 +44,8 @@ if __name__ == "__main__":
         # checking line format
         # "{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n
         # increment counter only for valid lines
-        c += 1
         if re.fullmatch(log_pattern, line, flags=0):
+            c += 1
             status_code, size = line.split()[-2:]
             fs += int(size)
             if status_code in all_status:

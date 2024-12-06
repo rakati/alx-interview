@@ -37,9 +37,17 @@ if __name__ == "__main__":
     d = st.copy()
     fs = 0
     while True:
+        def print_log_info(sig, frame):
+            """print log info"""
+            print("File size:", fs)
+            for status in all_status:
+                if d[status] > 0:
+                    print(f'{status}: {d[status]}')
         try:
             line = input()
         except EOFError:
+            if c > 0:
+                print_log_info(0, 0)
             break
         # checking line format
         # "{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n
@@ -51,12 +59,6 @@ if __name__ == "__main__":
             if status_code in all_status:
                 d[status_code] += 1
 
-        def print_log_info(sig, frame):
-            """print log info"""
-            print("File size:", fs)
-            for status in all_status:
-                if d[status] > 0:
-                    print(f'{status}: {d[status]}')
         if c == 10:
             print_log_info(0, 0)
             # reset log counter

@@ -29,12 +29,11 @@ if __name__ == "__main__":
     log_pattern = r'[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3} - '\
                   r'\[\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}.\d{1,6}\]'\
                   r' "GET \/projects\/260 HTTP\/1.1" \d{3} \d{1,4}'
-    st = {
+    d = {
             '200': 0, '301': 0, '400': 0, '401': 0, '403': 0, '404': 0,
             '405': 0, '500': 0
         }
     all_status = ['200', '301', '400', '401', '403', '404', '405', '500']
-    d = st.copy()
     fs = 0
     while True:
         def print_log_info(sig, frame):
@@ -63,8 +62,4 @@ if __name__ == "__main__":
             print_log_info(0, 0)
             # reset log counter
             c = 0
-            # reset status counter
-            d = st.copy()
-            # reset file size to 0
-            fs = 0
         signal.signal(signal.SIGINT, print_log_info)

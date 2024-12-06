@@ -28,7 +28,7 @@ if __name__ == "__main__":
     # date = r'\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}.\d{1,6}'
     log_pattern = r'[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3} - '\
                   r'\[\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}.\d{1,6}\]'\
-                  r' "GET \/projects\/260 HTTP\/1.1" \d{3} \d{1,4}'
+                  r' "GET \/projects\/260 HTTP\/1.1" \d{3} \d{1,4}\n'
     st = {
             '200': 0, '301': 0, '400': 0, '401': 0, '403': 0, '404': 0,
             '405': 0, '500': 0
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         # "{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n
         # increment counter only for valid lines
         c += 1
-        if re.match(log_pattern, line):
+        if re.fullmatch(log_pattern, line, flags=0):
             status_code, size = line.split()[-2:]
             fs += int(size)
             if status_code in all_status:
